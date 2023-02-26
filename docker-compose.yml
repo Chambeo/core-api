@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+  postgres:
+    image: postgres:12-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: chambeo
+      POSTGRES_USER: meze
+      POSTGRES_PASSWORD: meze
+    networks:
+      - chambeoEnv
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      # copy the sql script to create tables
+      - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    ##logging:
+      ##options:
+        ##max-size: 10m
+        ##max-file: "3"
+    ports:
+      - '5432:5432'
+  ##app:
+    ##build:
+      ##context: .
+      ##dockerfile: Dockerfile
+    ##ports:
+      ##- "8080:8080"
+    ##depends_on:
+      ##- postgres
+    ##links:
+      ##- postgres
+    ##environment:
+      ##POSTGRES_USER: "meze"
+      ##POSTGRES_PASSWORD: "meze"
+      ##POSTGRES_IP: postgres
+      ##POSTGRES_PORT: 5432
+      ##POSTGRES_DB: chambeo
+    ##networks:
+      ##- chambeoEnv
+networks:
+  chambeoEnv:
