@@ -1,5 +1,5 @@
 CREATE TABLE public.Users (
-                       id serial primary key,
+                       id varchar(250) primary key,
                        email varchar(250) not null,
                        password varchar(250) not null,
                        first_name varchar(250) not null,
@@ -12,6 +12,7 @@ CREATE TABLE public.Users (
                        zip_code varchar(25),
                        province varchar(200),
                        city varchar(250),
+                       role varchar(15),
                        account_verified boolean default false,
                        agree_terms_and_conditions boolean default false,
                        profile_completed boolean default false,
